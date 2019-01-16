@@ -1,14 +1,14 @@
 const fs = require('fs');
 
-var masterFile = "\\\\MEDSRG\\Zettler32\\2ZETINFO.mdb";
+var masterFile = "\\\\path\\to\\file.mdb";//this is the file to replicate to other computers
 var fileLocations = [
-	"\\\\ED\\Zettler32\\ZETINFOtest.mdb",
-	"\\\\NLC\\Zettler32\\ZETINFOtest.mdb",
-	"\\\\PPLC\\Zettler32\\ZETINFOtest.mdb",
-	"\\\\SURG\\Zettler32\\ZETINFOtest.mdb",
+	"\\\\path\\to\\file.mdb",//these are the files to overwrite with the master file
+	"\\\\path\\to\\file.mdb",
+	"\\\\path\\to\\file.mdb",
+	"\\\\path\\to\\file.mdb",
 ]
-var lastFile="C:\\Users\\Sterling\\Documents\\2ZETINFO.mdb";
-var bkUpLoc="C:\\Users\\Sterling\\Documents\\oldZetinfo\\";
+var lastFile="C:\\Users\\path\\to\\file.mdb";//local copy of last version of file to compare to see if the master file has been changed
+var bkUpLoc="C:\\Users\\path\\to\\backup folder\\";//backups of previous files in case something goes wrong
 
 let lastDate = fs.statSync(lastFile).mtimeMs;
 let currentDate = fs.statSync(masterFile).mtimeMs;
@@ -32,7 +32,7 @@ syncFiles = function(){
 
 writeLog = function(txt){
     stamp = getDateStamp();
-    filePath = "C:\Users\Sterling\Documents\ErrorLog.txt";
+    filePath = "C:\\Users\\path\\to\\ErrorLog.txt";
     str = stamp.concat(",", txt, ",");
     fs.appendFile(filePath, str, err => {
         if (err) throw err;
